@@ -20,9 +20,15 @@ import {
   getSidebarCount,
 } from "./components/task-app/data.js";
 
+function generateId() {
+  return typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+    ? crypto.randomUUID()
+    : Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+}
+
 function makeNotification(label, value) {
   return {
-    id: crypto.randomUUID(),
+    id: generateId(),
     label,
     value,
   };
@@ -144,7 +150,7 @@ export default function App() {
 
     setItems((current) => [
       {
-        id: crypto.randomUUID(),
+        id: generateId(),
         text,
         done: false,
         category: composer.category,
